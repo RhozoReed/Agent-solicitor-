@@ -1,7 +1,9 @@
 from worker.workflows.collecte import (
+    LANGUES_SUPPORTEES,
     CampagneInput,
     Prospect,
     _instruction,
+    _langue_de,
     _parse_reponse,
 )
 
@@ -61,3 +63,35 @@ def test_instruction_angle_entreprise():
     texte = _instruction(_campagne(), prospect)
     assert "entreprise" in texte
     assert "réduction d'impôt de 60 %" in texte
+
+
+def test_langue_par_defaut_francais():
+    campagne = _campagne()
+    prospect = Prospect(nom="Marie", email="m@exemple.fr", type="proche")
+    assert _langue_de(campagne, prospect) == "français"
+    assert "français" in _instruction(campagne, prospect)
+
+
+def test_langue_de_campagne_personnalisee():
+    campagne = _campagne(langue="anglais")
+    prospect = Prospect(nom="John", email="j@exemple.fr", type="proche")
+    assert _langue_de(campagne, prospect) == "anglais"
+    assert "anglais" in _instruction(campagne, prospect)
+
+
+def test_langue_surchargee_par_prospect():
+    campagne = _campagne(langue="anglais")
+    prospect = Prospect(nom="David", email="d@exemple.fr", type="proche", langue="hébreu")
+    assert _langue_de(campagne, prospect) == "hébreu"
+    assert "hébreu" in _instruction(campagne, prospect)
+
+
+def test_langues_supportees_couvertes():
+    assert set(LANGUES_SUPPORTEES) == {
+        "français",
+        "anglais",
+        "espagnol",
+        "hébreu",
+        "allemand",
+        "mandarin",
+    }

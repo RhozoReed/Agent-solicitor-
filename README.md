@@ -10,7 +10,8 @@ En entrée, la campagne fournit :
 
 - la cause (nom, description), l'objectif en euros et l'échéance,
 - le lien de don (HelloAsso, Stripe…),
-- la liste des prospects (nom, e-mail, type `proche`/`entreprise`/`institution`, note de contexte).
+- la liste des prospects (nom, e-mail, type `proche`/`entreprise`/`institution`, note de contexte),
+- la langue des e-mails (`langue`, par défaut `français`), avec surcharge possible par prospect.
 
 Pour chaque prospect, l'agent rédige un e-mail adapté :
 
@@ -19,6 +20,13 @@ Pour chaque prospect, l'agent rédige un e-mail adapté :
 - **institution** : angle subvention et intérêt général.
 
 Par défaut, le workflow tourne en **mode `dry_run`** : il produit des brouillons et n'envoie rien. L'envoi réel nécessite un connecteur e-mail configuré sur le déploiement.
+
+## Langues supportées
+
+L'agent rédige les e-mails (objet et corps) dans l'une de ces langues : **français, anglais, espagnol, hébreu, allemand, mandarin**.
+
+- langue par défaut de la campagne : champ `langue` (défaut : `français`),
+- surcharge par prospect : champ `langue` d'un prospect (ex. un donateur anglophone dans une campagne francophone).
 
 ## Structure
 
@@ -60,6 +68,7 @@ uv run python -m worker.entrypoints.worker
   "echeance": "30 juin 2026",
   "lien_don": "https://www.helloasso.com/associations/repas-solidaire",
   "nom_signataire": "Alex",
+  "langue": "français",
   "dry_run": true,
   "prospects": [
     {
@@ -72,7 +81,8 @@ uv run python -m worker.entrypoints.worker
       "nom": "Boulangerie Martin",
       "email": "contact@boulangerie-martin.fr",
       "type": "entreprise",
-      "note": "Commerçant du quartier"
+      "note": "Commerçant du quartier",
+      "langue": "anglais"
     }
   ]
 }
@@ -81,6 +91,7 @@ uv run python -m worker.entrypoints.worker
 ## Feuille de route
 
 - [x] Workflow de rédaction d'e-mails (dry-run)
+- [x] Multilingue : français, anglais, espagnol, hébreu, allemand, mandarin
 - [ ] Branchement d'un connecteur e-mail pour l'envoi réel
 - [ ] Relances automatiques J+7 / J+14
 - [ ] Planification hebdomadaire des campagnes
