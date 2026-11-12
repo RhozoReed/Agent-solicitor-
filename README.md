@@ -58,16 +58,16 @@ uv run python -m worker.entrypoints.worker
 2. Créer un déploiement sur la branche `main` avec **Dockerfile path** = `deploy/docker/Dockerfile.worker`.
 3. Attendre le statut **Active**, puis exécuter `campagne-de-collecte` en `dry_run` avec l'exemple d'entrée ci-dessous.
 
-## Exemple d'entrée
+## Exemple d'entrée (Dovian Solutions)
 
 ```json
 {
-  "nom_cause": "Repas Solidaire",
-  "description_cause": "Nous distribuons des repas aux personnes sans domicile à Lyon.",
-  "objectif_euros": 3000,
-  "echeance": "30 juin 2026",
-  "lien_don": "https://www.helloasso.com/associations/repas-solidaire",
-  "nom_signataire": "Alex",
+  "nom_cause": "Dovian Solutions",
+  "description_cause": "Dovian Solutions recherche des soutiens financiers pour développer des projets qui résolvent des problèmes de la vie quotidienne dans quatre secteurs : courses alimentaires, santé mentale, carrière et développement professionnel, et connaissance de soi.",
+  "objectif_euros": 10000,
+  "echeance": "31 mars 2026",
+  "lien_don": "https://[lien-de-don-a-creer]",
+  "nom_signataire": "L'équipe Dovian Solutions",
   "langue": "français",
   "dry_run": true,
   "prospects": [
@@ -75,18 +75,20 @@ uv run python -m worker.entrypoints.worker
       "nom": "Marie Dupont",
       "email": "marie.dupont@exemple.fr",
       "type": "proche",
-      "note": "Amie de longue date, sensible au sujet"
+      "note": "Amie de longue date, sensible à la santé mentale"
     },
     {
       "nom": "Boulangerie Martin",
       "email": "contact@boulangerie-martin.fr",
       "type": "entreprise",
-      "note": "Commerçant du quartier",
+      "note": "Commerçant du quartier, proche du secteur alimentaire",
       "langue": "anglais"
     }
   ]
 }
 ```
+
+> À ajuster : `objectif_euros`, `echeance` et surtout `lien_don` (à créer sur HelloAsso, Stripe ou équivalent).
 
 ## Feuille de route
 
