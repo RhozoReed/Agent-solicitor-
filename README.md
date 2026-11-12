@@ -63,7 +63,7 @@ uv run python -m worker.entrypoints.worker
 ```json
 {
   "nom_cause": "Dovian Solutions",
-  "description_cause": "Dovian Solutions recherche des soutiens financiers pour développer des projets qui résolvent des problèmes de la vie quotidienne dans quatre secteurs : courses alimentaires, santé mentale, carrière et développement professionnel, et connaissance de soi.",
+  "description_cause": "Dovian Solutions développe des logiciels fondés sur l'intelligence artificielle qui contribuent à l'avancement technologique dans quatre domaines : les courses alimentaires (réinventer la manière de faire ses courses et de gérer ses ressources en dehors du marché commun), la santé mentale (administrer le soin et le soutien aux personnes confrontées à des difficultés d'ajustement social et psychologique, tout en créant des opportunités pour les thérapeutes comme pour les personnes en recherche d'aide), la carrière et le développement professionnel, et la connaissance de soi.",
   "objectif_euros": 10000,
   "echeance": "31 mars 2026",
   "lien_don": "https://[lien-de-don-a-creer]",
