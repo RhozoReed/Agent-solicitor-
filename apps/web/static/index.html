@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f8f6">
+  <title>Collecte — votre copilote de campagne</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="Collecte, accueil">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>collecte<span class="brand-dot">.</span></span>
+      </a>
+      <button class="new-chat" id="new-chat"><span>＋</span> Nouvelle conversation</button>
+      <div class="sidebar-label">VOTRE ESPACE</div>
+      <button class="nav-item active"><span>◉</span> Assistant</button>
+      <button class="nav-item" id="campaign-nav"><span>▤</span> Ma campagne</button>
+      <div class="sidebar-note"><span class="sparkle">✳</span><strong>Une collecte, mille possibles.</strong><p>Votre partenaire pour transformer les bonnes idées en élans solidaires.</p></div>
+      <div class="sidebar-bottom"><span class="avatar">R</span><span><b>Votre espace</b><small>Prototype local</small></span><span class="more">···</span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu">☰</button>
+        <div class="breadcrumbs"><span>Votre espace</span><span class="crumb-slash">/</span><b>Assistant de collecte</b></div>
+        <div class="top-actions"><span class="status-pill"><i></i><span id="service-status">Mode démo</span></span><button class="icon-button" id="theme-button" aria-label="Changer le thème">◐</button></div>
+      </header>
+
+      <section class="workspace">
+        <div class="chat-column">
+          <div class="chat-content" id="chat-content">
+            <div class="welcome" id="welcome">
+              <div class="welcome-icon">✳</div>
+              <p class="eyebrow">VOTRE COPILOTE SOLIDAIRE</p>
+              <h1>Les belles causes<br>méritent d'être <em>soutenues.</em></h1>
+              <p class="welcome-copy">Parlons de votre projet. Je peux vous aider à préparer une campagne, écrire un message ou trouver les bons mots pour mobiliser votre communauté.</p>
+              <div class="suggestions">
+                <button class="suggestion" data-prompt="Aide-moi à préparer un message de collecte pour ma campagne."><span>✎</span><b>Rédiger un appel aux dons</b><small>Un message sincère, prêt à personnaliser</small><span class="suggestion-arrow">↗</span></button>
+                <button class="suggestion" data-prompt="Quelles sont les premières étapes pour lancer une campagne de collecte ?"><span>⌁</span><b>Préparer ma campagne</b><small>Clarifier le projet et les prochaines étapes</small><span class="suggestion-arrow">↗</span></button>
+                <button class="suggestion" data-prompt="Comment présenter l'impact concret de mon projet ?"><span>♡</span><b>Raconter mon impact</b><small>Mettre en lumière ce que votre projet change</small><span class="suggestion-arrow">↗</span></button>
+              </div>
+            </div>
+            <div class="messages" id="messages" aria-live="polite"></div>
+            <div class="typing-indicator hidden" id="typing"><span></span><span></span><span></span><small>L'assistant prépare sa réponse…</small></div>
+          </div>
+          <div class="composer-wrap">
+            <div class="camera-panel hidden" id="camera-panel"><video id="camera-video" autoplay muted playsinline></video><button id="camera-close" class="camera-close" aria-label="Arrêter la caméra">×</button><span>Caméra locale — aperçu privé</span></div>
+            <div class="attachment-tray" id="attachment-tray"></div>
+            <form class="composer" id="chat-form">
+              <textarea id="message-input" rows="1" placeholder="Écrivez votre message…" aria-label="Votre message"></textarea>
+              <div class="composer-tools">
+                <div class="tool-group">
+                  <button type="button" class="tool-button" id="attach-button" title="Joindre un fichier" aria-label="Joindre un fichier">＋<span>Joindre</span></button>
+                  <button type="button" class="tool-button" id="voice-button" title="Dicter un message" aria-label="Dicter un message">♩<span>Dicter</span></button>
+                  <button type="button" class="tool-button" id="camera-button" title="Activer l'aperçu caméra" aria-label="Activer l'aperçu caméra">▣<span>Caméra</span></button>
+                </div>
+                <div class="send-group"><span class="key-hint">Entrée ↵</span><button class="send-button" id="send-button" type="submit" aria-label="Envoyer le message">↑</button></div>
+              </div>
+              <input type="file" id="file-input" multiple hidden>
+            </form>
+            <p class="disclaimer">L'assistant peut se tromper. Vérifiez les informations avant de les partager.</p>
+          </div>
+        </div>
+
+        <aside class="campaign-panel" id="campaign-panel">
+          <div class="panel-heading"><div><p class="eyebrow">ESPACE CAMPAGNE</p><h2>Votre projet</h2></div><button class="icon-button panel-close" id="panel-close" aria-label="Fermer le panneau">×</button></div>
+          <p class="panel-intro">Quelques repères pour que je puisse mieux vous accompagner.</p>
+          <form id="campaign-form">
+            <label for="cause">Nom de la cause</label><input id="cause" name="cause" placeholder="Ex. Un toit pour tous">
+            <label for="description">Votre projet</label><textarea id="description" name="description" rows="3" placeholder="En quelques mots, quel changement souhaitez-vous créer ?"></textarea>
+            <div class="field-row"><div><label for="goal">Objectif (€)</label><input id="goal" name="goal" type="number" min="0" placeholder="5 000"></div><div><label for="deadline">Échéance</label><input id="deadline" name="deadline" placeholder="30 juin"></div></div>
+            <label for="donation-url">Lien de don</label><input id="donation-url" name="donation_url" type="url" placeholder="https://…">
+            <button type="button" class="draft-button" id="draft-button"><span>✦</span> Préparer un message</button>
+            <p class="private-note"><span>♧</span> Vos informations restent dans cette session de démonstration.</p>
+          </form>
+          <div class="panel-divider"></div>
+          <div class="capability-card"><span class="capability-icon">◉</span><div><b>Un espace à votre rythme</b><p>Échangez par écrit, dictez votre message ou activez l'aperçu caméra.</p></div></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <div class="toast hidden" id="toast" role="status"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
